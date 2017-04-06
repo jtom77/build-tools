@@ -1,21 +1,20 @@
 @echo off
 
-echo Hello World!
+echo Building clean %1
 
-cd ../
-
+if not exist build mkdir build
 
 rmdir build\src /s /q
 rmdir build\target /s /q
 del build\pom.xml
 
-xcopy  jira-holiday\src build\src /s /e /y /i
-copy  jira-holiday\pom.xml build\pom.xml
+echo .%1\src
+
+xcopy  .%1\src build\src /s /e /y /i
+copy  .%1\pom.xml build\pom.xml
 
 cd build
 
 dir
 
 atlas-mvn package -DskipTests
-
-pause
